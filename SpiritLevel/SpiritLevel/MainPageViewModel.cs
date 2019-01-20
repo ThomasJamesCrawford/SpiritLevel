@@ -19,6 +19,8 @@ namespace SpiritLevel
         private int ticks;
         private double rollSum, pitchSum;
 
+        private ContentPage Page;
+
         private Stopwatch sw = new Stopwatch();
         private Stopwatch delaySw = new Stopwatch();
 
@@ -148,20 +150,6 @@ namespace SpiritLevel
             }
         }
 
-        private double _avgYaw;
-        public double AvgYaw
-        {
-            get
-            {
-                return _avgYaw;
-            }
-            set
-            {
-                _avgYaw = value;
-                OnPropertyChanged("AvgYaw");
-            }
-        }
-
         private ObservableCollection<ResultModel> _results;
         public ObservableCollection<ResultModel> Results
         {
@@ -176,11 +164,12 @@ namespace SpiritLevel
             }
         }
 
-        public MainPageViewModel()
+        public MainPageViewModel(ContentPage p)
         {
             Accelerometer.ReadingChanged += Accelerometer_ReadingChanged;
             Accelerometer.Start(speed);
 
+            Page = p;
             Results = new ObservableCollection<ResultModel>();
             AvgTime = 10;
             DelayTime = 3;
@@ -188,6 +177,17 @@ namespace SpiritLevel
 
         public ICommand Toggle => new Command(() => ToggleTimer());
 
+        public ICommand Clear => new Command(() => ClearData());
+
+        private async void ClearData()
+        {
+            bool b = await Page.DisplayAlert("Clear Results", "Are you sure you want to clear all results?", "Clear All", "No");
+
+            if (b)
+            {
+                Results.Clear();
+            }
+        }
 
         private void Accelerometer_ReadingChanged(object sender, AccelerometerChangedEventArgs e)
         {

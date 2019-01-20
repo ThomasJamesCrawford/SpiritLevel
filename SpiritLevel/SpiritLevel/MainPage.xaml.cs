@@ -12,7 +12,7 @@ namespace SpiritLevel
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(this);
         }
     }
 }
