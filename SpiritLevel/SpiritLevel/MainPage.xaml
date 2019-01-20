@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SpiritLevel"
+             x:Class="SpiritLevel.MainPage">
+
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Text="Pitch: " FontSize="Large" VerticalOptions="Center"/>
+            <Label Grid.Column="1"
+                Text="{Binding Pitch}" FontSize="Large" VerticalOptions="Center"/>
+            <Label Grid.Row="1"
+                Text="Roll: " HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+            <Label Grid.Row="1" Grid.Column="1"
+                Text="{Binding Roll}" HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+        </Grid>
+
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Column="0"
+                Text="Timer Duration: " 
+                   FontSize="Large" VerticalOptions="Center"/>
+            <Entry Grid.Column="1"
+                Text="{Binding AvgTime}" HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+            <Label Grid.Column="0" Grid.Row="1"
+                Text="Timer Start Delay: " 
+                   HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+            <Entry Grid.Column="1" Grid.Row="1"
+                Text="{Binding DelayTime}" HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+        </Grid>
+
+        <Button Text="Begin Timer" Command="{Binding Toggle}"/>
+
+        <Label Text="{Binding DelayElapsed, StringFormat='Delay Timer: \{0\}'}" 
+               HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+        <Label Text="{Binding Elapsed, StringFormat='Elapsed Time: \{0\}'}" 
+               HorizontalOptions="CenterAndExpand" FontSize="Large" VerticalOptions="Center"/>
+
+        <ListView ItemsSource="{Binding Results}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="1" Text="{Binding Pitch}" FontSize="Large" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            <Label Text="Pitch: " FontSize="Large" VerticalOptions="FillAndExpand"/>
+                            <Label Grid.Column="1" Grid.Row="1" Text="{Binding Roll}" FontSize="Large" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            <Label Grid.Row="1" Text="Roll: " FontSize="Large" VerticalOptions="FillAndExpand"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>
